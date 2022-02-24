@@ -14,6 +14,12 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
+
+private const val CONNECT_TIMEOUT = 10L
+private const val WRITE_TIMEOUT = 1L
+private const val READ_TIMEOUT = 20L
+
+
 /**
  * @see[RemoteInjector] acts as a object provider and creator
  */
@@ -35,9 +41,10 @@ object RemoteInjector {
         okHttpLogger: HttpLoggingInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
-            .connectTimeout(1, TimeUnit.MINUTES)
-            .writeTimeout(1, TimeUnit.MINUTES)
-            .readTimeout(1, TimeUnit.MINUTES)
+            .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
+            .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
+            .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+            .retryOnConnectionFailure(true)
             .addInterceptor(okHttpLogger)
             .build()
     }
