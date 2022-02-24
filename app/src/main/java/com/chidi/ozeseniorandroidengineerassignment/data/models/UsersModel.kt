@@ -1,4 +1,4 @@
-package com.chidi.ozeseniorandroidengineerassignment.data
+package com.chidi.ozeseniorandroidengineerassignment.data.models
 
 data class UsersModel(
     val total_count: Int,

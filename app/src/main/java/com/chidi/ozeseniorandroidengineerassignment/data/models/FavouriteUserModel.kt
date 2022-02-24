@@ -1,11 +1,11 @@
-package com.chidi.ozeseniorandroidengineerassignment.data
+package com.chidi.ozeseniorandroidengineerassignment.data.models
 
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class GithubUserModel(
+data class FavouriteUserModel(
     val avatar_url: String,
     val bio: String,
     val blog: String,

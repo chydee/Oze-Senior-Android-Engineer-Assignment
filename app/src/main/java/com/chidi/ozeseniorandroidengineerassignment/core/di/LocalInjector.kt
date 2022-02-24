@@ -13,5 +13,13 @@ object LocalInjector {
 
     @Singleton
     @Provides
-    fun provideCharacterDao(db: AppDatabase) = db.favouriteDao()
+    fun provideGithubUsersDao(db: AppDatabase) = db.githubUsersDao()
+
+    @Singleton
+    @Provides
+    fun provideFavouritesDao(db: AppDatabase) = db.favouriteDao()
+
+    @Singleton
+    @Provides
+    fun provideRepoDao(db: AppDatabase) = db.getRepoDao()
 }
