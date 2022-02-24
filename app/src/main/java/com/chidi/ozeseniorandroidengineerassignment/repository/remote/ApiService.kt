@@ -1,4 +1,4 @@
-package com.chidi.ozeseniorandroidengineerassignment.repository
+package com.chidi.ozeseniorandroidengineerassignment.repository.remote
 
 import com.chidi.ozeseniorandroidengineerassignment.core.constants.AppConstants.DEFAULT_QUERY_LOCATION
 import com.chidi.ozeseniorandroidengineerassignment.core.constants.AppConstants.SEARCH_ENDPOINT

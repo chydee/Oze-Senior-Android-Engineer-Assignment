@@ -1,6 +1,6 @@
 package com.chidi.ozeseniorandroidengineerassignment.core.di
 
-import com.chidi.ozeseniorandroidengineerassignment.repository.ApiService
+import com.chidi.ozeseniorandroidengineerassignment.repository.remote.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
