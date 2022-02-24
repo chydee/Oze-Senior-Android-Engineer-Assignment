@@ -1,5 +1,6 @@
 package com.chidi.ozeseniorandroidengineerassignment.core.di
 
+import com.chidi.ozeseniorandroidengineerassignment.BuildConfig
 import com.chidi.ozeseniorandroidengineerassignment.repository.remote.ApiService
 import dagger.Module
 import dagger.Provides
@@ -51,7 +52,7 @@ object RemoteInjector {
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .addConverterFactory(MoshiConverterFactory.create())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        //.baseUrl(BuildConfig.BASE_URL)
+        .baseUrl(BuildConfig.BASE_URL)
         .client(okHttpClient)
         .build()
 }
