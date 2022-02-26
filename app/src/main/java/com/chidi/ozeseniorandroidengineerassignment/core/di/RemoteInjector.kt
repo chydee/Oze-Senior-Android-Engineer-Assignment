@@ -1,11 +1,11 @@
 package com.chidi.ozeseniorandroidengineerassignment.core.di
 
 import com.chidi.ozeseniorandroidengineerassignment.BuildConfig
-import com.chidi.ozeseniorandroidengineerassignment.data.GithubUsersMediator
 import com.chidi.ozeseniorandroidengineerassignment.data.GithubUsersPagingSource
-import com.chidi.ozeseniorandroidengineerassignment.data.impl.GithubUsersRemoteRepoImpl
-import com.chidi.ozeseniorandroidengineerassignment.repository.local.AppDatabase
+import com.chidi.ozeseniorandroidengineerassignment.data.impl.UsersRepositoryImpl
 import com.chidi.ozeseniorandroidengineerassignment.repository.remote.ApiService
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +14,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -30,6 +30,9 @@ private const val READ_TIMEOUT = 20L
 @Module
 @InstallIn(SingletonComponent::class)
 object RemoteInjector {
+
+    @Provides
+    fun provideGson(): Gson = GsonBuilder().create()
 
     @Singleton
     @Provides
@@ -60,8 +63,8 @@ object RemoteInjector {
 
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
-        .addConverterFactory(MoshiConverterFactory.create())
+    fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit = Retrofit.Builder()
+        .addConverterFactory(GsonConverterFactory.create(gson))
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .baseUrl(BuildConfig.BASE_URL)
         .client(okHttpClient)
@@ -69,13 +72,12 @@ object RemoteInjector {
 
     @Singleton
     @Provides
-    fun provideRemoteMediator(service: ApiService, database: AppDatabase) = GithubUsersMediator(service, database)
-
-    @Singleton
-    @Provides
     fun provideGithubUsersPagingSource(service: ApiService) = GithubUsersPagingSource(service)
 
+
     @Singleton
     @Provides
-    fun provideGithubUsersRemoteRepoImpl(database: AppDatabase, remoteMediator: GithubUsersMediator) = GithubUsersRemoteRepoImpl(database, remoteMediator)
+    fun provideGetMoviesRxRepositoryImpl(pagingSource: GithubUsersPagingSource) = UsersRepositoryImpl(pagingSource)
+
+
 }

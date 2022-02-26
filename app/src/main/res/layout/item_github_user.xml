@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_margin"
             android:layout_marginBottom="@dimen/small_margin"
+            android:textColor="@color/black"
             android:gravity="center"
             android:textSize="@dimen/medium_text_size"
             android:textStyle="bold"

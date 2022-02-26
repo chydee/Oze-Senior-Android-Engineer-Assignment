@@ -4,7 +4,7 @@ package com.chidi.ozeseniorandroidengineerassignment.data.models
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity("users")
+@Entity(tableName = "favourite_users")
 data class GithubUserModel(
     val avatar_url: String,
     val bio: String,
@@ -40,4 +40,3 @@ data class GithubUserModel(
     val updated_at: String,
     val url: String
 )
-

@@ -13,7 +13,7 @@ class LoadingStateViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(loadState: LoadState) {
-        binding.progressBar.isVisible = loadState is LoadState.Loading
+        binding.root.isVisible = loadState is LoadState.Loading
     }
 
     companion object {

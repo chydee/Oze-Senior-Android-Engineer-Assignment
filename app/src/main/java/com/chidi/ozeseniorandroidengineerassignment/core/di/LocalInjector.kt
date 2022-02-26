@@ -18,13 +18,5 @@ object LocalInjector {
 
     @Singleton
     @Provides
-    fun provideGithubUsersDao(db: AppDatabase) = db.githubUsersDao()
-
-    @Singleton
-    @Provides
     fun provideFavouritesDao(db: AppDatabase) = db.favouriteDao()
-
-    @Singleton
-    @Provides
-    fun provideRepoDao(db: AppDatabase) = db.getRepoDao()
 }

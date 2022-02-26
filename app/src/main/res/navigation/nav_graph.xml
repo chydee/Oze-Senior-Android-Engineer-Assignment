@@ -8,6 +8,6 @@
     <fragment
         android:id="@+id/fragmentHome"
         android:name="com.chidi.ozeseniorandroidengineerassignment.view.feature.FragmentHome"
-        android:label="fragment_home"
+        android:label="Oze Github Users"
         tools:layout="@layout/fragment_home" />
 </navigation>
