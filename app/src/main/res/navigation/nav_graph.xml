@@ -9,5 +9,39 @@
         android:id="@+id/fragmentHome"
         android:name="com.chidi.ozeseniorandroidengineerassignment.view.feature.FragmentHome"
         android:label="Oze Github Users"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/to_fragmentFavourites"
+            app:destination="@id/fragmentFavourites"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/fragmentHome"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/to_fragmentDetail"
+            app:destination="@id/fragmentDetail"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/fragmentHome"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentFavourites"
+        android:name="com.chidi.ozeseniorandroidengineerassignment.view.feature.FragmentFavourites"
+        android:label="My Favourites"
+        tools:layout="@layout/fragment_favourites">
+        <action
+            android:id="@+id/favourites_to_fragmentDetail"
+            app:destination="@id/fragmentDetail"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/fragmentFavourites"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentDetail"
+        android:name="com.chidi.ozeseniorandroidengineerassignment.view.feature.FragmentDetail"
+        android:label="Detail"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="login"
+            app:argType="string" />
+    </fragment>
 </navigation>

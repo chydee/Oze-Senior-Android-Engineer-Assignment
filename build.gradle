@@ -9,6 +9,7 @@ buildscript {
         // Dagger-Hilt
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.40.1'
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10'
+        classpath 'androidx.navigation:navigation-safe-args-gradle-plugin:2.4.1'
     }
 }
 

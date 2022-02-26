@@ -8,6 +8,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 abstract class BaseFragment : Fragment() {
 
-    val viewModel: GithubAppViewModel by viewModels()
+     val viewModel: GithubAppViewModel by viewModels()
 
 }

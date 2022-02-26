@@ -1,9 +1,9 @@
 package com.chidi.ozeseniorandroidengineerassignment.core.di
 
 import com.chidi.ozeseniorandroidengineerassignment.BuildConfig
-import com.chidi.ozeseniorandroidengineerassignment.data.GithubUsersPagingSource
 import com.chidi.ozeseniorandroidengineerassignment.data.impl.UsersRepositoryImpl
 import com.chidi.ozeseniorandroidengineerassignment.repository.remote.ApiService
+import com.chidi.ozeseniorandroidengineerassignment.repository.remote.GithubUsersPagingSource
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -77,7 +77,7 @@ object RemoteInjector {
 
     @Singleton
     @Provides
-    fun provideGetMoviesRxRepositoryImpl(pagingSource: GithubUsersPagingSource) = UsersRepositoryImpl(pagingSource)
+    fun provideUsersRepositoryImpl(pagingSource: GithubUsersPagingSource, service: ApiService) = UsersRepositoryImpl(pagingSource, service)
 
 
 }

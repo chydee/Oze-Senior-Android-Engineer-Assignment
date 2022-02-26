@@ -2,8 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/fragmentFavourites"
-        android:icon="@drawable/ic_baseline_favorite_24"
-        android:title="Favourites"
-        app:showAsAction="ifRoom" />
+        android:id="@+id/clearAll"
+        android:title="@string/clear_all_favourites"
+        app:showAsAction="never" />
 </menu>

@@ -14,11 +14,11 @@ interface FavouriteUserDao {
     fun getFavouriteUser(id: Int): Single<GithubUserModel>
 
     @Query("SELECT * FROM favourite_users")
-    fun getAllFavouriteUsers(): Single<GithubUserModel>
+    fun getAllFavouriteUsers(): Single<List<GithubUserModel>>
 
     @Query("DELETE FROM favourite_users")
     fun clearFavourite(): Completable
 
     @Delete
-    fun removeUserFromFavourite(user: GithubUserModel): Completable
+    fun deleteUser(user: GithubUserModel): Completable
 }

@@ -7,7 +7,6 @@ import coil.load
 import com.chidi.ozeseniorandroidengineerassignment.R
 import com.chidi.ozeseniorandroidengineerassignment.data.models.GithubUserModel
 import com.chidi.ozeseniorandroidengineerassignment.databinding.ItemGithubUserBinding
-import java.util.*
 
 class GithubUsersViewHolder(private val binding: ItemGithubUserBinding) : RecyclerView.ViewHolder(binding.root) {
 
@@ -16,7 +15,7 @@ class GithubUsersViewHolder(private val binding: ItemGithubUserBinding) : Recycl
             binding.userProfilePicture.load(avatar_url) {
                 crossfade(true)
             }
-            binding.userName.text = login.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+            binding.userName.text = login
         }
     }
 

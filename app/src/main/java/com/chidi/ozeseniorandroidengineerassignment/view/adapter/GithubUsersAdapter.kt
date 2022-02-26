@@ -4,9 +4,10 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.chidi.ozeseniorandroidengineerassignment.data.models.GithubUserModel
+import com.chidi.ozeseniorandroidengineerassignment.view.adapter.delegate.GithubUserItemDelegate
 import com.chidi.ozeseniorandroidengineerassignment.view.adapter.viewholder.GithubUsersViewHolder
 
-class GithubUsersAdapter : PagingDataAdapter<GithubUserModel, GithubUsersViewHolder>(
+class GithubUsersAdapter(private val delegate: GithubUserItemDelegate) : PagingDataAdapter<GithubUserModel, GithubUsersViewHolder>(
     COMPARATOR
 ) {
 
@@ -17,8 +18,11 @@ class GithubUsersAdapter : PagingDataAdapter<GithubUserModel, GithubUsersViewHol
     }
 
     override fun onBindViewHolder(holder: GithubUsersViewHolder, position: Int) {
-        getItem(position)?.let {
-            holder.bind(it)
+        getItem(position)?.let { model ->
+            holder.bind(model)
+            holder.itemView.setOnClickListener {
+                delegate.onItemClick(model)
+            }
         }
     }
 

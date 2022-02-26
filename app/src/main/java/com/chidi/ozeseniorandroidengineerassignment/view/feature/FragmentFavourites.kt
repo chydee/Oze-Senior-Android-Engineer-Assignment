@@ -1,22 +1,111 @@
 package com.chidi.ozeseniorandroidengineerassignment.view.feature
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.util.Log
+import android.view.*
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.chidi.ozeseniorandroidengineerassignment.R
+import com.chidi.ozeseniorandroidengineerassignment.data.models.GithubUserModel
+import com.chidi.ozeseniorandroidengineerassignment.databinding.FragmentHomeBinding
+import com.chidi.ozeseniorandroidengineerassignment.view.adapter.FavouritesAdapter
+import com.chidi.ozeseniorandroidengineerassignment.view.adapter.delegate.FavouriteGithubUserDelegate
+import com.chidi.ozeseniorandroidengineerassignment.view.feature.base.BaseFragment
+import com.chidi.ozeseniorandroidengineerassignment.view.utils.autoCleared
+import com.chidi.ozeseniorandroidengineerassignment.view.utils.gone
+import com.chidi.ozeseniorandroidengineerassignment.view.utils.showSnackBar
+import com.chidi.ozeseniorandroidengineerassignment.view.utils.visible
+import dagger.hilt.android.AndroidEntryPoint
 
-class FragmentFavourites : Fragment() {
+@AndroidEntryPoint
+class FragmentFavourites : BaseFragment(), FavouriteGithubUserDelegate {
 
+    private var binding: FragmentHomeBinding by autoCleared()
+
+    private lateinit var adapter: FavouritesAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favourites, container, false)
+    ): View {
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        adapter = FavouritesAdapter(this)
+        configureRecyclerView()
+        fetchFavourites()
+        observeLiveData()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.favourte_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == R.id.clearAll) {
+            clearAll()
+            true
+        } else {
+            super.onOptionsItemSelected(item)
+        }
+
+    }
+
+    override fun onItemClick(item: GithubUserModel) {
+        findNavController().navigate(FragmentFavouritesDirections.favouritesToFragmentDetail(item.login))
+    }
+
+    override fun onItemDeleteClick(item: GithubUserModel) {
+        viewModel.removeUser(item)
+    }
+
+    private fun configureRecyclerView() {
+        binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
+        binding.recyclerView.adapter = adapter
+    }
+
+    private fun fetchFavourites() {
+        Log.d("User", "Fetching users")
+        viewModel.getFavouriteUsers()
+        viewModel.favouritesLiveData.observe(viewLifecycleOwner) {
+            if (it != null) {
+                adapter.submitData(it)
+                binding.progressLoader.gone()
+            }
+        }
+    }
+
+    private fun clearAll() {
+        viewModel.clearAllFavourites()
+    }
+
+    private fun observeLiveData() {
+        viewModel.isRemovedLiveData.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.root.showSnackBar(getString(R.string.fav_user_removed))
+            } else {
+                binding.root.showSnackBar(getString(R.string.an_error_occurred))
+            }
+        }
+
+        viewModel.isCleared.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.recyclerView.gone()
+                binding.emptyFavouriteState.visible()
+            } else {
+                binding.recyclerView.visible()
+                binding.emptyFavouriteState.gone()
+            }
+        }
+    }
 
 }

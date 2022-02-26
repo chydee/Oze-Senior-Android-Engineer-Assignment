@@ -1,11 +1,10 @@
-package com.chidi.ozeseniorandroidengineerassignment.data
+package com.chidi.ozeseniorandroidengineerassignment.repository.remote
 
 import androidx.paging.PagingState
 import androidx.paging.rxjava2.RxPagingSource
 import com.chidi.ozeseniorandroidengineerassignment.core.constants.AppConstants.DEFAULT_PAGE_INDEX
 import com.chidi.ozeseniorandroidengineerassignment.data.models.GithubUserModel
 import com.chidi.ozeseniorandroidengineerassignment.data.models.UsersModel
-import com.chidi.ozeseniorandroidengineerassignment.repository.remote.ApiService
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
