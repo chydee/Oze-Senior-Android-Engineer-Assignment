@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.chidi.ozeseniorandroidengineerassignment.data.models.GithubUserModel
 import com.chidi.ozeseniorandroidengineerassignment.databinding.ItemGithubUserFavouriteBinding
 import com.chidi.ozeseniorandroidengineerassignment.view.adapter.delegate.FavouriteGithubUserDelegate
@@ -26,15 +25,13 @@ class FavouritesAdapter(private val listener: FavouriteGithubUserDelegate) : Rec
 
     inner class ViewHolder(private var binding: ItemGithubUserFavouriteBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: GithubUserModel) {
+            binding.model = item
             with(item) {
-                binding.userProfilePicture.load(avatar_url) {
-                    crossfade(true)
-                }
-                binding.userName.text = login
                 binding.btnDeleteFavourite.setOnClickListener {
                     listener.onItemDeleteClick(this)
                 }
             }
+            binding.executePendingBindings()
         }
     }
 

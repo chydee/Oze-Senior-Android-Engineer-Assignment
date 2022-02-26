@@ -9,7 +9,7 @@
         android:id="@+id/fragmentHome"
         android:name="com.chidi.ozeseniorandroidengineerassignment.view.feature.FragmentHome"
         android:label="Oze Github Users"
-        tools:layout="@layout/fragment_home">
+        tools:layout="@layout/fragment_list">
         <action
             android:id="@+id/to_fragmentFavourites"
             app:destination="@id/fragmentFavourites"

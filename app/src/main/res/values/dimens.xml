@@ -5,4 +5,5 @@
     <dimen name="profile_pic_height">200dp</dimen>
     <dimen name="small_margin">8dp</dimen>
     <dimen name="regular_text_size">16sp</dimen>
+    <dimen name="large_top_margin">50dp</dimen>
 </resources>

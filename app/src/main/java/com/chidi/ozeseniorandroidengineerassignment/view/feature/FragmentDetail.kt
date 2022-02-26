@@ -8,10 +8,7 @@ import androidx.navigation.fragment.navArgs
 import com.chidi.ozeseniorandroidengineerassignment.R
 import com.chidi.ozeseniorandroidengineerassignment.databinding.FragmentDetailBinding
 import com.chidi.ozeseniorandroidengineerassignment.view.feature.base.BaseFragment
-import com.chidi.ozeseniorandroidengineerassignment.view.utils.autoCleared
-import com.chidi.ozeseniorandroidengineerassignment.view.utils.gone
-import com.chidi.ozeseniorandroidengineerassignment.view.utils.showSnackBar
-import com.chidi.ozeseniorandroidengineerassignment.view.utils.visible
+import com.chidi.ozeseniorandroidengineerassignment.view.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,11 +28,12 @@ class FragmentDetail : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = this
         fetchData(args.login)
         configureObservers()
         binding.btnAddToFavourites.setOnClickListener {
             binding.user?.let {
-                viewModel.insertUser(it)
+                viewModel.insertUser(it.toSqliteConstraintData())
             }
         }
     }

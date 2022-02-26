@@ -76,7 +76,7 @@
                 android:id="@+id/btnAddToFavourites"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="@dimen/large_top_margin"
                 android:text="@string/add_to_favourite_btn_text"
                 app:backgroundTint="@color/secondaryDarkColor" />
         </androidx.appcompat.widget.LinearLayoutCompat>

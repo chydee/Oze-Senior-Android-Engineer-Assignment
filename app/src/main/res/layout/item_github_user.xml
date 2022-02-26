@@ -1,33 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/medium_margin">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <data>
+
+        <variable
+            name="model"
+            type="com.chidi.ozeseniorandroidengineerassignment.data.models.GithubUserModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_margin="@dimen/medium_margin">
 
-        <ImageView
-            android:id="@+id/userProfilePicture"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/profile_pic_height"
-            android:background="@color/profilePicDefColor"
-            android:contentDescription="@string/user_profile_picture_desc"
-            android:scaleType="centerCrop" />
-
-        <TextView
-            android:id="@+id/userName"
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin"
-            android:layout_marginBottom="@dimen/small_margin"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:textSize="@dimen/medium_text_size"
-            android:textStyle="bold"
-            tools:text="User Name" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
-</com.google.android.material.card.MaterialCardView>
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/userProfilePicture"
+                srcUrl="@{model.avatar_url}"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/profile_pic_height"
+                android:background="@color/profilePicDefColor"
+                android:contentDescription="@string/user_profile_picture_desc"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:gravity="center"
+                android:text="@{model.login}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/medium_text_size"
+                android:textStyle="bold"
+                tools:text="User Name" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

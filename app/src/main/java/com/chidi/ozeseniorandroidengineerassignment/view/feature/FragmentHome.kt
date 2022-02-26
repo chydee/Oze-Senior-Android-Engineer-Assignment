@@ -8,7 +8,7 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.chidi.ozeseniorandroidengineerassignment.R
 import com.chidi.ozeseniorandroidengineerassignment.data.models.GithubUserModel
-import com.chidi.ozeseniorandroidengineerassignment.databinding.FragmentHomeBinding
+import com.chidi.ozeseniorandroidengineerassignment.databinding.FragmentListBinding
 import com.chidi.ozeseniorandroidengineerassignment.view.adapter.GithubUsersAdapter
 import com.chidi.ozeseniorandroidengineerassignment.view.adapter.LoadingStateAdapter
 import com.chidi.ozeseniorandroidengineerassignment.view.adapter.delegate.GithubUserItemDelegate
@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FragmentHome : BaseFragment(), GithubUserItemDelegate {
 
-    private var binding: FragmentHomeBinding by autoCleared()
+    private var binding: FragmentListBinding by autoCleared()
     private lateinit var adapter: GithubUsersAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,12 +33,13 @@ class FragmentHome : BaseFragment(), GithubUserItemDelegate {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomeBinding.inflate(inflater)
+        binding = FragmentListBinding.inflate(inflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = this
         adapter = GithubUsersAdapter(this)
         configureRecyclerView()
         getUsers()

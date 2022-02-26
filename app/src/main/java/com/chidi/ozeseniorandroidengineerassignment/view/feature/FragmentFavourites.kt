@@ -7,7 +7,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.chidi.ozeseniorandroidengineerassignment.R
 import com.chidi.ozeseniorandroidengineerassignment.data.models.GithubUserModel
-import com.chidi.ozeseniorandroidengineerassignment.databinding.FragmentHomeBinding
+import com.chidi.ozeseniorandroidengineerassignment.databinding.FragmentListBinding
 import com.chidi.ozeseniorandroidengineerassignment.view.adapter.FavouritesAdapter
 import com.chidi.ozeseniorandroidengineerassignment.view.adapter.delegate.FavouriteGithubUserDelegate
 import com.chidi.ozeseniorandroidengineerassignment.view.feature.base.BaseFragment
@@ -20,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FragmentFavourites : BaseFragment(), FavouriteGithubUserDelegate {
 
-    private var binding: FragmentHomeBinding by autoCleared()
+    private var binding: FragmentListBinding by autoCleared()
 
     private lateinit var adapter: FavouritesAdapter
 
@@ -33,12 +33,13 @@ class FragmentFavourites : BaseFragment(), FavouriteGithubUserDelegate {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding = FragmentListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = this
         adapter = FavouritesAdapter(this)
         configureRecyclerView()
         fetchFavourites()
@@ -78,8 +79,13 @@ class FragmentFavourites : BaseFragment(), FavouriteGithubUserDelegate {
         viewModel.getFavouriteUsers()
         viewModel.favouritesLiveData.observe(viewLifecycleOwner) {
             if (it != null) {
-                adapter.submitData(it)
-                binding.progressLoader.gone()
+                if (it.isNotEmpty()) {
+                    adapter.submitData(it)
+                    binding.progressLoader.gone()
+                } else {
+                    binding.recyclerView.gone()
+                    binding.emptyFavouriteState.visible()
+                }
             }
         }
     }
@@ -92,6 +98,7 @@ class FragmentFavourites : BaseFragment(), FavouriteGithubUserDelegate {
         viewModel.isRemovedLiveData.observe(viewLifecycleOwner) {
             if (it) {
                 binding.root.showSnackBar(getString(R.string.fav_user_removed))
+                fetchFavourites()
             } else {
                 binding.root.showSnackBar(getString(R.string.an_error_occurred))
             }
@@ -107,5 +114,4 @@ class FragmentFavourites : BaseFragment(), FavouriteGithubUserDelegate {
             }
         }
     }
-
 }

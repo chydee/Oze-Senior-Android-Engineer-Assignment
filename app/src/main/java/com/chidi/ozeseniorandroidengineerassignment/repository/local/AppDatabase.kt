@@ -20,7 +20,7 @@ abstract class AppDatabase : RoomDatabase() {
             instance ?: synchronized(this) { instance ?: buildDatabase(context).also { instance = it } }
 
         private fun buildDatabase(appContext: Context) =
-            Room.databaseBuilder(appContext, AppDatabase::class.java, "Oze_Github_User_Application.db")
+            Room.databaseBuilder(appContext, AppDatabase::class.java, "Oze_Github_UserDB.db")
                 .fallbackToDestructiveMigration()
                 .build()
     }
