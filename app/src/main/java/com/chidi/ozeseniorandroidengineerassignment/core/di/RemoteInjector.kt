@@ -1,6 +1,10 @@
 package com.chidi.ozeseniorandroidengineerassignment.core.di
 
 import com.chidi.ozeseniorandroidengineerassignment.BuildConfig
+import com.chidi.ozeseniorandroidengineerassignment.data.GithubUsersMediator
+import com.chidi.ozeseniorandroidengineerassignment.data.GithubUsersPagingSource
+import com.chidi.ozeseniorandroidengineerassignment.data.impl.GithubUsersRemoteRepoImpl
+import com.chidi.ozeseniorandroidengineerassignment.repository.local.AppDatabase
 import com.chidi.ozeseniorandroidengineerassignment.repository.remote.ApiService
 import dagger.Module
 import dagger.Provides
@@ -62,4 +66,16 @@ object RemoteInjector {
         .baseUrl(BuildConfig.BASE_URL)
         .client(okHttpClient)
         .build()
+
+    @Singleton
+    @Provides
+    fun provideRemoteMediator(service: ApiService, database: AppDatabase) = GithubUsersMediator(service, database)
+
+    @Singleton
+    @Provides
+    fun provideGithubUsersPagingSource(service: ApiService) = GithubUsersPagingSource(service)
+
+    @Singleton
+    @Provides
+    fun provideGithubUsersRemoteRepoImpl(database: AppDatabase, remoteMediator: GithubUsersMediator) = GithubUsersRemoteRepoImpl(database, remoteMediator)
 }

@@ -10,12 +10,12 @@ import com.chidi.ozeseniorandroidengineerassignment.data.models.RemoteKeys
 interface RemoteKeysDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(remoteKey: List<RemoteKeys>)
+    fun insertAll(remoteKey: List<RemoteKeys>)
 
-    @Query("SELECT * FROM remotekeys WHERE repoId = :id")
-    suspend fun remoteKeysGithubUsersId(id: String): RemoteKeys?
+    @Query("SELECT * FROM remotekeys WHERE id = :id")
+    fun remoteKeysGithubUsersId(id: Int): RemoteKeys?
 
-    @Query("DELETE FROM remotekeys")
-    suspend fun clearRemoteKeys()
+    @Query("DELETE FROM users_remote_keys")
+    fun clearRemoteKeys()
 }
 

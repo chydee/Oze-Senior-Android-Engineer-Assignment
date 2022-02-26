@@ -10,13 +10,13 @@ interface FavouriteUserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(user: FavouriteUserModel): Completable
 
-    @Query("SELECT * FROM favouriteusermodel WHERE id = :id")
+    @Query("SELECT * FROM favourite_users WHERE id = :id")
     fun getFavouriteUser(id: Int): Single<FavouriteUserModel>
 
-    @Query("SELECT * FROM favouriteusermodel")
+    @Query("SELECT * FROM favourite_users")
     fun getAllFavouriteUsers(): Single<FavouriteUserModel>
 
-    @Query("DELETE FROM favouriteusermodel")
+    @Query("DELETE FROM favourite_users")
     fun clearFavourite(): Completable
 
     @Delete

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Oze Senior Android Engineer Assignment</string>
+    <string name="user_profile_picture_desc">User Profile Picture</string>
 </resources>
