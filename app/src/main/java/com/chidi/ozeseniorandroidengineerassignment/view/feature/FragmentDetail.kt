@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.chidi.ozeseniorandroidengineerassignment.R
+import com.chidi.ozeseniorandroidengineerassignment.data.models.GithubUserModel
 import com.chidi.ozeseniorandroidengineerassignment.databinding.FragmentDetailBinding
 import com.chidi.ozeseniorandroidengineerassignment.view.feature.base.BaseFragment
 import com.chidi.ozeseniorandroidengineerassignment.view.utils.*
@@ -28,22 +29,10 @@ class FragmentDetail : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         fetchData(args.login)
         configureObservers()
-        if (binding.user.is_favourite) {
-            binding.btnAddToFavourites.text = getString(R.string.already_a_fav_text)
-        }
-        binding.btnAddToFavourites.setOnClickListener {
-            binding.user?.let {
-                if (binding.user.is_favourite) {
-                    viewModel.insertUser(it.toSqliteConstraintData())
-                } else {
-                    viewModel.removeUser(it.toSqliteConstraintData())
-                }
 
-            }
-        }
     }
 
     private fun fetchData(login: String) {
@@ -57,6 +46,7 @@ class FragmentDetail : BaseFragment() {
             if (it != null) {
                 binding.user = it
                 binding.progressBar.gone()
+                configureButton(it)
             }
         }
 
@@ -65,18 +55,17 @@ class FragmentDetail : BaseFragment() {
                 binding.root.showSnackBar(getString(R.string.marked_as_fav))
             } else {
                 binding.root.showSnackBar(getString(R.string.an_error_occurred))
-            }
-        }
-
-        viewModel.isRemovedLiveData.observe(viewLifecycleOwner) {
-            if (it) {
-                binding.btnAddToFavourites.text = getString(R.string.add_to_favourite_btn_text)
-            } else {
-                binding.root.showSnackBar(getString(R.string.an_error_occurred))
+                binding.btnAddToFavourites.isEnabled = true
             }
         }
 
     }
 
-
+    private fun configureButton(user: GithubUserModel) {
+        binding.btnAddToFavourites.setOnClickListener {
+            binding.btnAddToFavourites.isEnabled = false
+            viewModel.insertUser(user.toSqliteConstraintData())
+        }
+    }
 }
+

@@ -89,24 +89,37 @@
                         android:layout_marginEnd="@dimen/small_margin"
                         android:orientation="vertical"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
+                        app:layout_constraintEnd_toStartOf="@+id/div"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintHorizontal_chainStyle="packed"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:gravity="center"
                             android:text="@string/following_label"
                             android:textSize="16sp" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:gravity="center"
                             android:text="@{String.valueOf(user.following)}"
+                            android:textColor="@color/black"
                             android:textSize="16sp" />
                     </LinearLayout>
+
+                    <View
+                        android:id="@+id/div"
+                        android:layout_width="1dp"
+                        android:layout_height="50dp"
+                        android:background="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
+                        app:layout_constraintStart_toEndOf="@+id/linearLayout"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <LinearLayout
                         android:id="@+id/linearLayout2"
@@ -117,19 +130,22 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/linearLayout"
+                        app:layout_constraintStart_toEndOf="@+id/div"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/followers_label"
+                            android:gravity="center"
                             android:textSize="16sp" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:gravity="center"
                             android:text="@{String.valueOf(user.followers)}"
+                            android:textColor="@color/black"
                             android:textSize="16sp" />
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>

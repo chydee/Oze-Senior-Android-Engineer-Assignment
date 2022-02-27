@@ -1,7 +1,6 @@
 package com.chidi.ozeseniorandroidengineerassignment.view.feature
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -39,7 +38,7 @@ class FragmentFavourites : BaseFragment(), FavouriteGithubUserDelegate {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         adapter = FavouritesAdapter(this)
         configureRecyclerView()
         fetchFavourites()
@@ -75,13 +74,12 @@ class FragmentFavourites : BaseFragment(), FavouriteGithubUserDelegate {
     }
 
     private fun fetchFavourites() {
-        Log.d("User", "Fetching users")
         viewModel.getFavouriteUsers()
         viewModel.favouritesLiveData.observe(viewLifecycleOwner) {
             if (it != null) {
+                binding.progressLoader.gone()
                 if (it.isNotEmpty()) {
                     adapter.submitData(it)
-                    binding.progressLoader.gone()
                 } else {
                     binding.recyclerView.gone()
                     binding.emptyFavouriteState.visible()
