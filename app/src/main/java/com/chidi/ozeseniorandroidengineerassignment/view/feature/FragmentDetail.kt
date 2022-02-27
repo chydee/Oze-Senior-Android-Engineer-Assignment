@@ -31,12 +31,12 @@ class FragmentDetail : BaseFragment() {
         binding.lifecycleOwner = this
         fetchData(args.login)
         configureObservers()
-        if (binding.user.isFavourite) {
+        if (binding.user.is_favourite) {
             binding.btnAddToFavourites.text = getString(R.string.already_a_fav_text)
         }
         binding.btnAddToFavourites.setOnClickListener {
             binding.user?.let {
-                if (binding.user.isFavourite) {
+                if (binding.user.is_favourite) {
                     viewModel.insertUser(it.toSqliteConstraintData())
                 } else {
                     viewModel.removeUser(it.toSqliteConstraintData())

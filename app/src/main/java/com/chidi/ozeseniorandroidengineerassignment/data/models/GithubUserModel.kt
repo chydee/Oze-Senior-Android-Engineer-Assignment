@@ -39,5 +39,5 @@ data class GithubUserModel(
     val type: String?,
     val updated_at: String?,
     val url: String?,
-    val isFavourite: Boolean = false
+    val is_favourite: Boolean = false
 )
