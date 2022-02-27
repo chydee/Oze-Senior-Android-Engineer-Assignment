@@ -7,8 +7,11 @@
     <string name="loading_error">Error loading data!</string>
     <string name="retry_btn_text">RETRY</string>
     <string name="add_to_favourite_btn_text">Add To Favourite</string>
+    <string name="already_a_fav_text">Remove From Favourite</string>
     <string name="empty_state_favourite">You have no favourite user!</string>
     <string name="fav_user_removed">User removed from favourite</string>
     <string name="an_error_occurred">An error occurred, TRY AGAIN!</string>
     <string name="marked_as_fav">User marked as favourite!</string>
+    <string name="following_label">Following</string>
+    <string name="followers_label">Followers</string>
 </resources>

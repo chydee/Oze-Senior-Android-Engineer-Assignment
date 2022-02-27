@@ -31,9 +31,17 @@ class FragmentDetail : BaseFragment() {
         binding.lifecycleOwner = this
         fetchData(args.login)
         configureObservers()
+        if (binding.user.isFavourite) {
+            binding.btnAddToFavourites.text = getString(R.string.already_a_fav_text)
+        }
         binding.btnAddToFavourites.setOnClickListener {
             binding.user?.let {
-                viewModel.insertUser(it.toSqliteConstraintData())
+                if (binding.user.isFavourite) {
+                    viewModel.insertUser(it.toSqliteConstraintData())
+                } else {
+                    viewModel.removeUser(it.toSqliteConstraintData())
+                }
+
             }
         }
     }
@@ -55,6 +63,14 @@ class FragmentDetail : BaseFragment() {
         viewModel.isFavourite.observe(viewLifecycleOwner) {
             if (it) {
                 binding.root.showSnackBar(getString(R.string.marked_as_fav))
+            } else {
+                binding.root.showSnackBar(getString(R.string.an_error_occurred))
+            }
+        }
+
+        viewModel.isRemovedLiveData.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.btnAddToFavourites.text = getString(R.string.add_to_favourite_btn_text)
             } else {
                 binding.root.showSnackBar(getString(R.string.an_error_occurred))
             }

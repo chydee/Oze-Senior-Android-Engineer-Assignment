@@ -36,5 +36,6 @@ fun GithubUserModel.toSqliteConstraintData(): GithubUserModel {
         this.type ?: "",
         this.updated_at ?: "",
         this.url ?: "",
+        true
     )
 }
