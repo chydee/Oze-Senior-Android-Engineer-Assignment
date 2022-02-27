@@ -1,5 +1,7 @@
 # :waxing_gibbous_moon: Oze Senior Android Engineer Assignment
 
+[Download APK](https://github.com/chydee/Oze-Senior-Android-Engineer-Assignment/releases/download/debug-update/app-debug.apk)
+
 # :scroll: Assignment instructions
 
 Implement “Github” user’s api for Lagos developers
@@ -21,9 +23,9 @@ This assignment solution is implemented with MVVM
 It is written 100% in Kotlin with both unit and integrated tests.🙂
 
 <p align="center">
-  <img src="photos/home.jpeg" alt="MAD Summary" width="40%" hspace="15"/>
-  <img src="photos/fav_def.jpeg" alt="MAD Summary" width="40%" hspace="15"/>
-  <img src="photos/fav_def_empty.jpeg" alt="MAD Summary" width="40%" hspace="15"/>
+  <img src="photos/home.jpeg" alt="MAD Summary" width="20%" hspace="15"/>
+  <img src="photos/fav_def.jpeg" alt="MAD Summary" width="20%" hspace="15"/>
+  <img src="photos/fav_def_empty.jpeg" alt="MAD Summary" width="20%" hspace="15"/>
 </p>
 
 <p align="center">
