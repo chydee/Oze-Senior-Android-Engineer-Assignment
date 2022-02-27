@@ -20,6 +20,19 @@ This assignment solution is implemented with MVVM
 
 It is written 100% in Kotlin with both unit and integrated tests.🙂
 
+<p align="center">
+  <img src="photos/home.jpeg" alt="MAD Summary" width="40%" hspace="15"/>
+  <img src="photos/fav_def.jpeg" alt="MAD Summary" width="40%" hspace="15"/>
+  <img src="photos/fav_def_empty.jpeg" alt="MAD Summary" width="40%" hspace="15"/>
+</p>
+
+<p align="center">
+  <img src="photos/fav_clear_all.jpeg" alt="MAD Summary" width="20%" hspace="15"/>
+  <img src="photos/user_jav.jpeg" alt="MAD Summary" width="20%" hspace="15"/>
+  <img src="photos/user_lie.jpeg" alt="MAD Summary" width="20%" hspace="15"/>
+  <img src="photos/user_ola.jpeg" alt="MAD Summary" width="20%" hspace="15"/>
+</p>
+
 ## Installation
 
 * To run this code, clone this repository using this command `git clone https://github.com/chydee/Oze-Senior-Android-Engineer-Assignment.git`
