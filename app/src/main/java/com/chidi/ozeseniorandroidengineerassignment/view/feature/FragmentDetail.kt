@@ -59,6 +59,12 @@ class FragmentDetail : BaseFragment() {
             }
         }
 
+        viewModel.errorLiveData.observe(viewLifecycleOwner) {
+            if (it != null) {
+                binding.root.showSnackBar(it)
+            }
+        }
+
     }
 
     private fun configureButton(user: GithubUserModel) {
