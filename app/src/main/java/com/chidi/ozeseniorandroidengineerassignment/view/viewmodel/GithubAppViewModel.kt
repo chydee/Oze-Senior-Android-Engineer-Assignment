@@ -25,6 +25,10 @@ class GithubAppViewModel @Inject constructor(private val source: UsersRepository
     val usersLiveData: LiveData<PagingData<GithubUserModel>>
         get() = _githubUserRequest
 
+    private val _errorLiveData = MutableLiveData<String>()
+    val errorLiveData: LiveData<String>
+        get() = _errorLiveData
+
     @OptIn(ExperimentalCoroutinesApi::class)
     fun fetchGithubUsers() {
         source.getGithubUsers()
@@ -53,7 +57,7 @@ class GithubAppViewModel @Inject constructor(private val source: UsersRepository
                         if (it.isSuccessful) {
                             _retrieveUserDetail.postValue(it.body())
                         } else {
-
+                            _errorLiveData.postValue(it.errorBody()?.string() ?: "An error has occurred! Try again")
                         }
                     }
                 }, {
