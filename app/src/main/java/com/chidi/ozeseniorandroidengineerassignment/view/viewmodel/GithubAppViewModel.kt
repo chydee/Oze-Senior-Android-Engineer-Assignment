@@ -17,8 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GithubAppViewModel @Inject constructor(private val source: UsersRepositoryImpl, private val local: LocalDataSource) : ViewModel() {
-    private val disposeBag = CompositeDisposable()
 
+    private val disposeBag = CompositeDisposable()
     private val schedulers = Schedulers.io()
 
     private val _githubUserRequest = MutableLiveData<PagingData<GithubUserModel>>()
