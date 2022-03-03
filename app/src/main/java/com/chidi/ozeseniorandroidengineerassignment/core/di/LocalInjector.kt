@@ -16,6 +16,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object LocalInjector {
 
+    @Provides
+    @Singleton
     fun provideDatabase(@ApplicationContext appContext: Context) =
         Room.databaseBuilder(appContext, AppDatabase::class.java, "Github_Users_App.db")
             .fallbackToDestructiveMigration()
